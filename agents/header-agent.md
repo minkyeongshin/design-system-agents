@@ -51,18 +51,17 @@ import { ProjectLogo } from "@stellar/design-system";
 </div>
 3. Mobile (≤ 430px)
 
-Badge hidden: .Badge { display: none; }
-Logo shows icon only (clip wordmark):
+Stellar logo: wordmark visible (do NOT clip)
+Badge: hidden
+Padding: 8px 16px
+Right side: ThemeSwitch + action button (optional)
 
 scss@media screen and (max-width: 430px) {
+  .LabLayout__header__main {
+    padding: 8px 16px;
+  }
   .ProjectLogo {
     .Badge { display: none; }
-    a {
-      display: block;
-      width: 32px;
-      overflow: hidden;
-      svg { width: 128px; height: 32px; }
-    }
   }
 }
 
@@ -72,6 +71,33 @@ Logo: MUST use <ProjectLogo /> from @stellar/design-system — never plain text 
 Badge: automatically rendered inside <ProjectLogo title="..." /> — the title prop sets the badge text
 Theme toggle: MUST use <ThemeSwitch /> from @stellar/design-system
 Buttons: use SDS <Button> component — never plain <button> with hardcoded styles
+
+ProjectLogo spacing (from SDS)
+
+Logo + Badge gap: margin-right: 0.75rem (12px) — do NOT override this
+Logo anchor: height: 1.5rem, width: 1.9rem
+Logo SVG: height: 100%, width: 6rem, fill: var(--sds-clr-base-01)
+
+Badge styles (from SDS — do NOT override)
+
+Font: var(--sds-ff-base), size 1rem, weight var(--sds-fw-medium)
+Padding: 0.375rem 0.75rem
+Border radius: 6.25rem
+Border: 1px solid var(--Badge-color-border)
+Default colors:
+
+Text: var(--sds-clr-gray-12)
+Background: var(--sds-clr-gray-01)
+Border: var(--sds-clr-gray-06)
+
+
+Secondary (purple) colors:
+
+Text: var(--sds-clr-lilac-11)
+Background: var(--sds-clr-lilac-02)
+Border: var(--sds-clr-lilac-06)
+
+
 
 
 Required Styles (SCSS)
@@ -120,3 +146,13 @@ Replace plain text logo with <ProjectLogo /> component
 Replace hardcoded colors with SDS tokens
 Add missing <ThemeSwitch /> if not present
 Report a summary of what was changed at the end
+
+
+⚠️ SCOPE - CRITICAL
+ONLY modify header-related code. Nothing else.
+
+✅ Allowed: header element, header CSS/SCSS, header component files
+❌ Never touch: body background color, main content styles, footer styles, page-level buttons (outside header), any non-header components
+❌ Never install packages unless strictly required for the header
+❌ Never modify index.css global styles
+If you find non-header issues (e.g. hardcoded colors in footer), report them only — do NOT fix them
