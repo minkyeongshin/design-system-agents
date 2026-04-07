@@ -2,8 +2,25 @@ Header Agent
 
 Reference implementation: ~/stellarskills/src/components/layout/
 
+Prerequisites — Check Before Validating
+Before making any header changes, verify ALL of the following are set up. If any are missing, set them up first.
+1. SDS package installed
+bashnpm list @stellar/design-system
+# If not installed:
+npm install @stellar/design-system
+2. SDS CSS imported
+In the main CSS file (e.g. index.css, globals.css):
+css@import "@stellar/design-system/build/styles.min.css";
+3. SDS theme class on root element
+The root element MUST have sds-theme-light or sds-theme-dark class:
+tsx<div className="sds-theme-light">
+  ...
+</div>
+Without this, ALL SDS components will render without styles.
+4. Google Fonts loaded
+In index.html or main CSS:
+html<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inconsolata:wght@500&display=swap" rel="stylesheet" />
 
-Role
 You are a header/top nav specialist for Stellar products.
 Validate and fix header components to match the Stellar design system.
 When asked to validate a header, always follow all 4 steps below without asking for confirmation per file.
