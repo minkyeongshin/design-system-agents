@@ -70,34 +70,24 @@ Required Components
 Logo: MUST use <ProjectLogo /> from @stellar/design-system — never plain text or custom SVG
 Badge: automatically rendered inside <ProjectLogo title="..." /> — the title prop sets the badge text
 Theme toggle: MUST use <ThemeSwitch /> from @stellar/design-system
-Buttons: use SDS <Button> component — never plain <button> with hardcoded styles
+Action button (e.g. "Developer docs", "Try the demo"): keep original project styling — do NOT replace with SDS <Button> component unless it already uses one. Preserve the existing button's className and style.
 
 ProjectLogo spacing (from SDS)
 
-Logo + Badge gap: margin-right: 0.75rem (12px) — do NOT override this
+Logo + Badge gap: 0.5rem (8px) — set via .SkillsLanding__logo { gap: 0.5rem }
 Logo anchor: height: 1.5rem, width: 1.9rem
 Logo SVG: height: 100%, width: 6rem, fill: var(--sds-clr-base-01)
 
 Badge styles (from SDS — do NOT override)
 
-Font: var(--sds-ff-base), size 1rem, weight var(--sds-fw-medium)
-Padding: 0.375rem 0.75rem
-Border radius: 6.25rem
-Border: 1px solid var(--Badge-color-border)
-Default colors:
-
-Text: var(--sds-clr-gray-12)
-Background: var(--sds-clr-gray-01)
-Border: var(--sds-clr-gray-06)
-
-
-Secondary (purple) colors:
-
-Text: var(--sds-clr-lilac-11)
-Background: var(--sds-clr-lilac-02)
+Size: md (Badge--md)
+Variant: secondary (Badge--secondary)
+Typography: text/sm/600 — font-size: 14px, line-height: 20px, font-weight: 600, var(--sds-ff-base)
+Padding: 2px 8px
+Color: var(--sds-clr-lilac-11) (#5746AF)
+Background: var(--sds-clr-lilac-02) (#FBFAFF)
 Border: var(--sds-clr-lilac-06)
-
-
+Set via <ProjectLogo /> automatically — do NOT manually create a Badge component
 
 
 Required Styles (SCSS)
