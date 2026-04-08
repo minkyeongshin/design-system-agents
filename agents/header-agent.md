@@ -106,6 +106,10 @@ If you cannot find the original, STOP and ask
 
 
 Required SCSS
+Add these styles to the header CSS/SCSS file only — never to index.css or any global stylesheet.
+
+To find the right file: search for existing header/layout CSS file in the project. If none exists, create one (e.g. src/styles/header.css) and import it in the header component file only.
+
 scss.LabLayout__header--landing {
   border-bottom: 1px solid var(--sds-clr-gray-06);
 
