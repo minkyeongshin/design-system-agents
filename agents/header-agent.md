@@ -85,10 +85,17 @@ ProjectLogo + Badge
 
 Logo: always use <ProjectLogo /> — never plain text or custom SVG
 Logo + Badge gap: 0.5rem (8px) — apply to .ProjectLogo { gap: 0.5rem }
-Badge: Badge--secondary Badge--md, font-weight: 600
-If SDS doesn't apply font-weight 600 automatically:
+Badge: Badge--secondary Badge--md
+Font: var(--sds-ff-base) (Inter) — never Inconsolata or any other font
+Font size: 14px, line-height: 20px, font-weight: 600
+If SDS doesn't apply these automatically, force it:
 
-scss.LabLayout__header .Badge { font-weight: 600; }
+scss.LabLayout__header .Badge {
+  font-family: var(--sds-ff-base);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
 
 ⚠️ Action Button Rules — CRITICAL
 
@@ -121,6 +128,18 @@ scss.LabLayout__header--landing {
     }
   }
 }
+
+Step 4: Fix All Issues
+
+Do NOT ask for confirmation per file
+Fix all issues in one pass
+If the header is not using SDS components (<ProjectLogo />, <ThemeSwitch />), rewrite it from scratch using the correct variation structure. Do NOT patch on top of non-SDS code.
+Replace plain text logo with <ProjectLogo />
+Replace hardcoded colors with SDS tokens
+Add missing <ThemeSwitch /> if required by variation
+NEVER touch the action button unless it is completely missing
+Report a summary of what was changed at the end
+
 
 Validation Checklist
 
