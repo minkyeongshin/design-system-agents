@@ -31,6 +31,9 @@ tsx<div className="sds-theme-light">
   ...
 </div>
 Without this, ALL SDS components will render without styles.
+
+✅ This is the ONE exception to the scope rule — you ARE allowed to add sds-theme-light to the root element even if it's outside the header file. Find where the app root is rendered (e.g. main.tsx, App.tsx, index.html) and add the class there. This is required for the header to work at all.
+
 4. Google Fonts loaded
 In index.html or main CSS:
 html<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inconsolata:wght@500&display=swap" rel="stylesheet" />
