@@ -16,8 +16,11 @@ Identify the variation — then start making changes
 
 
 Prerequisites
-Check all 4 before starting. If any are missing:
-#CheckIf missing1SDS package: npm list @stellar/design-systemReport only — do NOT install2SDS CSS: @import "@stellar/design-system/build/styles.min.css" in main CSS fileReport only — do NOT add3sds-theme-light or sds-theme-dark on root elementFix it — add to root element in main.tsx or App.tsx4Google Fonts loaded in index.html or main CSSReport only — do NOT add
+Check all 4 before starting.
+
+⚠️ If prerequisites 1, 2, or 4 are missing: STOP immediately. Do NOT fix them. Do NOT install packages. Do NOT modify any files. Report what is missing to the user and wait for instructions.
+
+#CheckIf missing1SDS package: npm list @stellar/design-systemInstall it: npm install @stellar/design-system2SDS CSS: @import "@stellar/design-system/build/styles.min.css" in main CSS fileSTOP — report to user3sds-theme-light or sds-theme-dark on root elementFix it — add to root element in main.tsx or App.tsx only4Google Fonts loaded in index.html or main CSSSTOP — report to user
 
 Variations
 1. Main (Desktop)
@@ -166,11 +169,12 @@ Only touch:
 
 Header component file
 Header CSS/SCSS
-Root element sds-theme-light class (main.tsx or App.tsx only)
+index.css — only to add SDS CSS import as first line (prerequisite 2)
+index.html — only to add Google Fonts (prerequisite 4)
+Root element sds-theme-light class in main.tsx or App.tsx (prerequisite 3)
 
 Never touch:
 
 Body, main content, footer, or any non-header component
-index.css or any global stylesheet
 Any button outside the header
-Any package installation
+Any package installation beyond @stellar/design-system
