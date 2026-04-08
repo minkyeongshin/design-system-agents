@@ -16,11 +16,8 @@ Identify the variation — then start making changes
 
 
 Prerequisites
-Check all 4 before starting.
-
-⚠️ If prerequisites 1, 2, or 4 are missing: STOP immediately. Do NOT fix them. Do NOT install packages. Do NOT modify any files. Report what is missing to the user and wait for instructions.
-
-#CheckIf missing1SDS package: npm list @stellar/design-systemInstall it: npm install @stellar/design-system2SDS CSS: @import "@stellar/design-system/build/styles.min.css" in main CSS fileSTOP — report to user3sds-theme-light or sds-theme-dark on root elementFix it — add to root element in main.tsx or App.tsx only4Google Fonts loaded in index.html or main CSSSTOP — report to user
+Check all 4 before starting. Fix anything that's missing — do NOT ask for confirmation.
+#CheckIf missing — fix it1SDS package: npm list @stellar/design-systemnpm install @stellar/design-system2SDS CSS: @import "@stellar/design-system/build/styles.min.css" in main CSS fileAdd as the first line of index.css3sds-theme-light or sds-theme-dark on root elementAdd to root element in main.tsx or App.tsx only4Google Fonts: Inter + Inconsolata loadedAdd to index.html: <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 Variations
 1. Main (Desktop)
@@ -109,10 +106,7 @@ If you cannot find the original, STOP and ask
 
 
 Required SCSS
-Add these styles to the header CSS/SCSS file only — never to index.css or any global stylesheet.
-
-To find the right file: search for existing header/layout CSS file in the project. If none exists, create one (e.g. src/styles/header.css) and import it in the header component file only.
-
+Search for an existing header/layout CSS file in the project. If none exists, create one (e.g. src/styles/header.css) and import it in the header component file.
 scss.LabLayout__header--landing {
   border-bottom: 1px solid var(--sds-clr-gray-06);
 
@@ -156,7 +150,7 @@ Validation Checklist
  Correct left button per variation
  <ThemeSwitch /> present where required
  .ProjectLogo has gap: 0.5rem
- Badge has font-weight: 600
+ Badge has font-family: var(--sds-ff-base) and font-weight: 600
  border-bottom on landing header
  Mobile padding 16px
  No hardcoded hex colors
@@ -168,10 +162,10 @@ Validation Checklist
 Only touch:
 
 Header component file
-Header CSS/SCSS
+Header CSS/SCSS file
 index.css — only to add SDS CSS import as first line (prerequisite 2)
 index.html — only to add Google Fonts (prerequisite 4)
-Root element sds-theme-light class in main.tsx or App.tsx (prerequisite 3)
+main.tsx or App.tsx — only to add sds-theme-light class (prerequisite 3)
 
 Never touch:
 
