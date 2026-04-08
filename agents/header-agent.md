@@ -198,10 +198,28 @@ NEVER touch the action button unless it is completely missing
 Report a summary of what was changed at the end
 
 
-⚠️ SCOPE - CRITICAL
-ONLY modify header-related code. Nothing else.
-✅ Allowed: header element, header CSS/SCSS, header component files
-❌ Never touch: body background color, main content styles, footer styles, page-level buttons (outside header), any non-header components
-❌ Never install packages unless strictly required for the header
-❌ Never modify index.css global styles
-If you find non-header issues (e.g. hardcoded colors in footer), report them only — do NOT fix them
+⚠️ SCOPE - CRITICAL — READ THIS BEFORE DOING ANYTHING
+Your ONLY job is the header. You are NOT allowed to touch anything outside the header. No exceptions.
+✅ Allowed:
+
+Header component file
+Header CSS/SCSS file
+Header-related imports
+
+❌ NEVER touch — even if you think it's wrong, even if the user didn't say to preserve it:
+
+Body background color
+Main content area (anything below the header)
+Page-level layout or spacing
+Footer styles
+Any button outside the header
+index.css or any global stylesheet — even to add SDS CSS import
+Any component that is not the header
+
+
+If SDS CSS is not imported yet, report it as a prerequisite issue and STOP. Do NOT add it yourself. Ask the user to add it manually.
+
+❌ NEVER install any package unless it is strictly and only required for the header itself.
+If you find issues outside the header (e.g. hardcoded colors in footer, broken layout in body):
+→ Report them in your summary at the end
+→ Do NOT fix them. Do NOT touch them. Do NOT "just quickly fix" them.
