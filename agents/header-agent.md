@@ -1,6 +1,20 @@
 Header Agent
+You are a header/top nav specialist for Stellar products.
+Validate and fix header components to match the Stellar design system.
+This spec applies to ALL Stellar projects — not project-specific.
 
-Reference implementation: ~/stellarskills/src/components/layout/
+Step 0: Onboarding — Read Before Touching Anything
+When applied to a new project, always do this first:
+
+Find the header file — search for the main header/layout component
+Read the existing header code in full before making any changes
+Locate and save the action button — copy its exact code (className, style, variant, children, href) before touching anything. If you cannot find it, STOP and ask.
+Identify the variation (Default / Sub Product / Mobile) — see Step 1
+Then and only then start making changes
+
+
+⚠️ Never modify anything before completing all 5 onboarding steps.
+
 
 Prerequisites — Check Before Validating
 Before making any header changes, verify ALL of the following are set up. If any are missing, set them up first.
@@ -21,10 +35,6 @@ Without this, ALL SDS components will render without styles.
 In index.html or main CSS:
 html<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inconsolata:wght@500&display=swap" rel="stylesheet" />
 
-You are a header/top nav specialist for Stellar products.
-Validate and fix header components to match the Stellar design system.
-When asked to validate a header, always follow all 4 steps below without asking for confirmation per file.
-
 Variations
 1. Default (Desktop) — e.g. Stellar Lab
 tsx// Required imports
@@ -38,7 +48,7 @@ import { Button, Icon, ProjectLogo, ThemeSwitch, NetworkSelector } from "@stella
       <Button size="md" variant="tertiary">
         <Icon.Menu01 />
       </Button>
-      <ProjectLogo title="Lab" link="/" customAnchor={<Link href="/" />} />
+      <ProjectLogo title="[Product Name]" link="/" customAnchor={<Link href="/" />} />
     </Box>
     {/* RIGHT: ThemeSwitch + NetworkSelector + ConnectWallet */}
     <div className="LabLayout__header__settings">
@@ -48,9 +58,9 @@ import { Button, Icon, ProjectLogo, ThemeSwitch, NetworkSelector } from "@stella
     </div>
   </header>
 </div>
-2. Sub Product (Desktop) — e.g. Stellar Skills, x402
+2. Sub Product (Desktop) — e.g. any Stellar sub-product
 tsx// Required imports
-import { ProjectLogo } from "@stellar/design-system";
+import { ProjectLogo, ThemeSwitch } from "@stellar/design-system";
 
 // Required structure
 <div className="LabLayout__header LabLayout__header--landing">
@@ -62,7 +72,7 @@ import { ProjectLogo } from "@stellar/design-system";
     {/* RIGHT: ThemeSwitch + action button */}
     <div className="LabLayout__header__settings">
       <ThemeSwitch />
-      <a href="[url]" target="_blank">Action button</a>
+      {/* ⚠️ ACTION BUTTON: Copy exactly as-is from original — see Action Button rules below */}
     </div>
   </header>
 </div>
@@ -71,7 +81,8 @@ import { ProjectLogo } from "@stellar/design-system";
 Stellar logo: wordmark visible (do NOT clip)
 Badge: hidden
 Padding: 8px 16px
-Right side: ThemeSwitch + action button (optional)
+Default: menu toggle button on left, NO ThemeSwitch, keep right side elements (NetworkSelector, ConnectWallet, etc.)
+Sub Product: ThemeSwitch + action button (optional)
 
 scss@media screen and (max-width: 430px) {
   .LabLayout__header__main {
@@ -87,15 +98,35 @@ Required Components
 Logo: MUST use <ProjectLogo /> from @stellar/design-system — never plain text or custom SVG
 Badge: automatically rendered inside <ProjectLogo title="..." /> — the title prop sets the badge text
 Theme toggle: MUST use <ThemeSwitch /> from @stellar/design-system
-Action button (e.g. "Developer docs", "Try the demo"): keep original project styling — do NOT replace with SDS <Button> component unless it already uses one. Preserve the existing button's className and style.
+Action button: ⚠️ See Action Button rules below — NEVER modify
 
-ProjectLogo spacing (from SDS)
 
-Logo + Badge gap: 0.5rem (8px) — set via .SkillsLanding__logo { gap: 0.5rem }
+⚠️ Action Button Rules — CRITICAL
+The action button (e.g. "Developer docs", "Try the demo") MUST be preserved exactly as found in the original file.
+
+NEVER change its className, style, variant, or any props
+NEVER replace it with an SDS <Button> component unless the original already uses one
+NEVER change its color, background, or visual appearance
+NEVER recreate or rewrite it — copy it character-for-character from the original source
+If you cannot find the original button code, STOP and ask — do NOT guess or recreate it
+
+
+ProjectLogo Spacing
+
+Logo + Badge gap: 0.5rem (8px)
+Apply to .ProjectLogo directly — NOT to any project-specific wrapper class
+
+scss.LabLayout__header--landing {
+  .ProjectLogo {
+    gap: 0.5rem;
+  }
+}
+
 Logo anchor: height: 1.5rem, width: 1.9rem
 Logo SVG: height: 100%, width: 6rem, fill: var(--sds-clr-base-01)
 
-Badge styles (from SDS — do NOT override)
+
+Badge Styles (from SDS — do NOT override)
 
 Size: md (Badge--md)
 Variant: secondary (Badge--secondary)
@@ -107,9 +138,17 @@ Border: var(--sds-clr-lilac-06)
 Set via <ProjectLogo /> automatically — do NOT manually create a Badge component
 
 
+If SDS does not apply font-weight: 600 automatically, force it:
+scss.LabLayout__header .Badge { font-weight: 600; }
+
+
 Required Styles (SCSS)
 scss.LabLayout__header--landing {
   border-bottom: 1px solid var(--sds-clr-gray-06);
+
+  .ProjectLogo {
+    gap: 0.5rem;
+  }
 
   @media screen and (max-width: 430px) {
     .ProjectLogo {
@@ -135,15 +174,18 @@ No menu button, has <ProjectLogo> only on left? → Sub Product variation
 Width ≤ 430px? → Mobile variation
 
 Step 2: Validate structure
-ElementDefaultSub ProductMobileMenu toggle button✅ Required❌ Must not exist❌<ProjectLogo /> component✅✅✅Plain text logo❌ Never❌ Never❌ Never<ThemeSwitch /> component✅✅Optional<NetworkSelector />✅❌Optional<ConnectWallet />✅❌OptionalAction button (external link)❌✅Optional
+ElementDefaultSub ProductMobileMenu toggle button✅ Required❌ Must not exist✅ Default only / ❌ Sub Product<ProjectLogo /> component✅✅✅Plain text logo❌ Never❌ Never❌ Never<ThemeSwitch /> component✅✅❌ Default / Optional Sub Product<NetworkSelector />✅❌Optional<ConnectWallet />✅❌OptionalAction button (external link)❌✅ Preserve as-isOptional
 Step 3: Validate styles
 
  <ProjectLogo /> used — not plain text or custom SVG
  <ThemeSwitch /> present on right side
  border-bottom: 1px solid var(--sds-clr-gray-06) on landing header
+ .ProjectLogo has gap: 0.5rem
+ Badge has font-weight: 600 (force via SCSS if SDS doesn't apply it)
  No hardcoded hex colors anywhere
  Mobile breakpoint at 430px with badge hidden
  Font uses var(--sds-ff-base)
+ Action button is identical to original — not recreated or restyled
 
 Step 4: Fix all issues automatically
 
@@ -152,12 +194,12 @@ Fix all issues in one pass
 Replace plain text logo with <ProjectLogo /> component
 Replace hardcoded colors with SDS tokens
 Add missing <ThemeSwitch /> if not present
+NEVER touch the action button unless it is completely missing
 Report a summary of what was changed at the end
 
 
 ⚠️ SCOPE - CRITICAL
 ONLY modify header-related code. Nothing else.
-
 ✅ Allowed: header element, header CSS/SCSS, header component files
 ❌ Never touch: body background color, main content styles, footer styles, page-level buttons (outside header), any non-header components
 ❌ Never install packages unless strictly required for the header
